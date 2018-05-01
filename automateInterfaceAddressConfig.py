@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-
+###NB!!!Description has to be changed
 ### The script automatically configures ip addresses on network devices
 ### The script is made for configuring networks with point-to-point connections, each interface receives a /30 address
 ### The script assumes device's hostname is made by one character and one number. The character identify the group, the number the ID of the device. NB: ID has to be between 0 and 9. Example: hostname is R1
