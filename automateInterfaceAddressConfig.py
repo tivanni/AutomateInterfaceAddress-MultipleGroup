@@ -1,8 +1,6 @@
 #!/usr/bin/python
 
 
-#!/usr/bin/python
-
 ### The script automatically configures IP addresses on network devices
 ### The script is made for configuring networks with point-to-point connections, each interface receives a /30 address
 ### The script assumes device's hostname is made by one character and one number. The character identifies the group, the number the ID of the device. NB: ID has to be between 0 and 9. Example: hostname is R1
@@ -90,9 +88,9 @@ for hostname in hostnames:
                   S - Switch, H - Host, I - IGMP, r - Repeater
 
     Device ID        Local Intrfce     Holdtme    Capability  Platform  Port ID
-    R2               Fas 1/0            147        R S I      2691      Fas 1/1
-    R3               Fas 1/1            123        R S I      2691      Fas 1/1
-    R1               Fas 0/1            135        R S I      2691      Fas 1/1
+    R2.local.com               Fas 1/0            147        R S I      2691      Fas 1/1
+    R3.local.com               Fas 1/1            123        R S I      2691      Fas 1/1
+    R1.local.com               Fas 0/1            135        R S I      2691      Fas 1/1
     '''
     cdp_output = child.before
 
@@ -104,9 +102,10 @@ for hostname in hostnames:
         if(line): ###check line is not empty
             line_fields = line.split()
             first_field=line_fields[0]
+            first_field_fields = first_field.split(".") ###extract the hostname from the full hostname (hostaname + domain). IE: extract R3 from R3.local.com
             ###If the first field in the line is a neighbor of a valid device in the the network, proceed with configuration
-            if(devices.has_key(first_field)):
-                remote_hostname = first_field
+            if(devices.has_key(first_field_fields[0])):
+                remote_hostname = first_field_fields[0]
                 ###The Group of the hostname is the first letter of the hostname. Example: the Group of R5 is R
                 remote_hostname_group = remote_hostname[0]
                 ###ID of the  hostname is the number after the group. Example: R5 ID is 5. NB: devices must have ID between 0 and 9
