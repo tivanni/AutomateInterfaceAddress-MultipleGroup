@@ -1,6 +1,11 @@
 #!/usr/bin/python
+
+###The script removes the IP address configured on all the interfaces. NB: the mgmt IP address is not removed
+
 import pexpect
 import getpass
+
+
 
 ###Creating Dictionary for Devices and Groups
 devices = {}
